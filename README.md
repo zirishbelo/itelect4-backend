@@ -1,1 +1,1 @@
-https://github.com/zirishbelo/itelect4-project.git
+itelect4-backend-ivory.vercel.app
