@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import express, {
 
   type Request,
@@ -12,15 +14,29 @@ import cors from "cors";
 
 import mongoose from "mongoose";
 
+import { connectDB } from "./config/db";
+
 import { authRouter } from "./routes/auth";
+
+import { eventRouter } from "./routes/events";
 
 import { rsvpRouter} from "./routes/rsvp";
 
 export const app = express();
 
-app.use(cors());
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGIN ?? "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter((origin) => origin !== "");
+
+app.use(cors({ origin: ALLOWED_ORIGINS }));
 
 app.use(express.json());
+
+app.use(async (_req: Request, _res: Response, next: NextFunction) => {
+  await connectDB();
+  next();
+});
 
 app.get("/api/health", (_req: Request, res: Response) => {
 
@@ -29,6 +45,8 @@ app.get("/api/health", (_req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRouter);
+
+app.use("/api/events", eventRouter);
 
 app.use("/api/rsvp", rsvpRouter);
 
@@ -80,3 +98,5 @@ app.use(
   },
 
 );
+
+export default app;
