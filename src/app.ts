@@ -22,6 +22,8 @@ import { eventRouter } from "./routes/events";
 
 import { rsvpRouter} from "./routes/rsvp";
 
+import { aiRouter } from "./routes/ai";
+
 export const app = express();
 
 const ALLOWED_ORIGINS = (process.env.CORS_ORIGIN ?? "")
@@ -49,6 +51,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/events", eventRouter);
 
 app.use("/api/rsvp", rsvpRouter);
+
+app.use("/api/ai", aiRouter);
 
 app.use((req: Request, res: Response) => {
 
