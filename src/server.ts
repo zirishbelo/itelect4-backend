@@ -4,14 +4,10 @@ import { connectDB } from "./config/db";
 
 const PORT = Number(process.env.PORT) || 4000;
 
-connectDB()
-    .then(() => {
-        app.listen(PORT, () =>
-            console.log(`API on http://localhost:${PORT}`),
-        );
-    })
+connectDB().catch((err: unknown) => {
+    console.error("Could not connect to MongoDB:", err);
+});
 
-    .catch((err: unknown) => {
-        console.error("Could not start:", err);
-        process.exit(1);
-    });
+app.listen(PORT, () =>
+    console.log(`API on http://localhost:${PORT}`),
+);
