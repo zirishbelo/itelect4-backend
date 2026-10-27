@@ -5,6 +5,7 @@
 Express and TypeScript API for the ITELECT4 RSVP Tracker. It authenticates users with JWT, serves event records, protects RSVP records by their authenticated owner, and provides an RSVP system review route.
 
 - **Live API:** https://itelect4-backend-ivory.vercel.app/api/health
+- **Live app:** https://itelect4-project-neon.vercel.app
 - **Frontend repository:** https://github.com/zirishbelo/itelect4-project
 
 ## Architecture
